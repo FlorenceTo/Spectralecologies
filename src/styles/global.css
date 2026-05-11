@@ -33,7 +33,7 @@ h1, h2, h3 {
   color: rgba(255, 255, 255, 0.9);
 }
 h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 0.5rem; }
-h2 { font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 0.5rem; }
+h2 { font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 2rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 0.5rem; }
 h3 { font-size: 1.25rem; margin-bottom: 0.25rem; }
 
 /* Paragraphs */
