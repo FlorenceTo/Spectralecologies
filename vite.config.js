@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '',   // add this line
+  base: '',   // generates relative asset paths
   server: {
     proxy: {
       '/api/copernicus-token': {
