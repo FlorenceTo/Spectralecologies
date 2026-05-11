@@ -1,0 +1,367 @@
+/* Inter font */
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #adadad; /* default grey; will be changed by JS color picker */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem 1rem 1rem;
+}
+
+/* Headings */
+h1, h2, h3 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.9);
+}
+h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 0.5rem; }
+h2 { font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 0.5rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+
+/* Paragraphs */
+p {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Links – default (dark mode) */
+a {
+  color: #9afc97;
+  text-decoration: none;
+  border-bottom: 1px dotted #9afc97;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+a:hover {
+  opacity: 0.7;
+  border-bottom-color: #9afc97;
+}
+
+/* ---- Header (transparent, inherits body background) ---- */
+.site-header {
+  position: sticky;
+  top: 0;
+  background: transparent;
+  padding: 0.8rem 1.3rem;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.nav-links a {
+  border-bottom: none;
+  color: inherit;  /* inherits body color (white in dark mode) */
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.nav-links a:hover {
+  opacity: 0.7;
+  border-bottom: none;
+}
+
+/* Archive cards */
+.archive-card {
+  border: 1px solid #9afc97;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease;
+}
+.archive-card:hover { background: rgba(0, 0, 0, 0.3); }
+.archive-card h3 { color: rgba(255, 255, 255, 0.9); }
+.archive-card p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); margin: 0.5rem 0; }
+.archive-card small { font-size: 0.7rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Map wrapper */
+.map-wrapper { margin: 2rem 0; border: 1px solid #9afc97; background: #30342f; }
+
+/* Archive grid */
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Back link */
+.back-link { display: inline-block; margin-bottom: 1.5rem; font-size: 0.85rem; }
+
+/* ---- Light background mode (when body has class 'light-bg') ---- */
+body.light-bg {
+  background: #f5f3ef;
+  color: rgba(0, 0, 0, 0.85);
+}
+body.light-bg h1, 
+body.light-bg h2, 
+body.light-bg h3, 
+body.light-bg p {
+  color: rgba(0, 0, 0, 0.85);
+}
+body.light-bg h2 {
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+}
+body.light-bg a {
+  color: #2c6e2c;
+  border-bottom-color: #2c6e2c;
+}
+body.light-bg .site-header {
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+}
+body.light-bg .archive-card {
+  border-color: #2c6e2c;
+  background: rgba(255, 255, 255, 0.8);
+}
+body.light-bg .archive-card h3,
+body.light-bg .archive-card p,
+body.light-bg .archive-card small {
+  color: rgba(0, 0, 0, 0.7);
+}
+body.light-bg .map-wrapper {
+  border-color: #2c6e2c;
+}
+
+/* Remove underline from specific heading */
+.no-underline {
+  border-bottom: none !important;
+}
+
+/* ---- Color buttons (same as invisiblesignals) ---- */
+.color-btn {
+  background: transparent;
+  border: 1px solid #9afc97;
+  border-radius: 20px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: inherit;
+  font-family: monospace;
+}
+body.light-bg .color-btn {
+  border-color: #2c6e2c;
+  color: #2c2c2c;
+}
+
+/* ---- Plotly overrides for theme ---- */
+.js-plotly-plot .plotly .main-svg {
+  background: transparent !important;
+}
+.js-plotly-plot .plotly .legendtext,
+.js-plotly-plot .plotly .xtick text,
+.js-plotly-plot .plotly .ytick text,
+.js-plotly-plot .plotly .annotation-text {
+  fill: currentColor !important;
+}
+body.light-bg .js-plotly-plot .plotly .legendtext,
+body.light-bg .js-plotly-plot .plotly .xtick text,
+body.light-bg .js-plotly-plot .plotly .ytick text,
+body.light-bg .js-plotly-plot .plotly .annotation-text {
+  fill: #1a1a1a !important;
+}
+/* Ensure Plotly grid lines are visible in light mode */
+body.light-bg .js-plotly-plot .plotly .gridlayer .grid {
+  stroke: #999 !important;
+}
+body.light-bg .js-plotly-plot .plotly .ygrid .grid {
+  stroke: #999 !important;
+}
+body.light-bg .js-plotly-plot .plotly .xgrid .grid {
+  stroke: #999 !important;
+}
+
+#timeline-info a {
+  color: #9afc97;
+  text-decoration: underline;
+}
+body.light-bg #timeline-info a {
+  color: #2c6e2c;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .container { padding: 0 0.8rem 0.8rem 0.8rem; }
+  .site-header { padding: 0.6rem 0.8rem; }
+  .archive-grid { gap: 1rem; }
+}
+
+ss
+/* Ultra‑compact custom color picker panel */
+.picker-panel {
+  font-size: 0.6rem !important;       /* half of typical browser default */
+  padding: 0.3rem !important;         /* minimal inner spacing */
+  gap: 0.3rem !important;             /* tiny gap between rows */
+  min-width: 120px !important;       /* much narrower panel */
+  background: rgba(28, 28, 27, 0.95);
+  backdrop-filter: blur(4px);
+  border: 1px solid #9afc97;
+  border-radius: 8px;                /* slight rounding, optional */
+}
+
+/* Each row: colour and opacity */
+.color-input-group {
+  gap: 1rem !important;
+  justify-content: space-between;
+  margin: 0;
+}
+.color-input-group label {
+  font-size: 0.5rem !important;
+  letter-spacing: 0.4px;
+  opacity: 0.8;
+}
+.color-input-group input[type="color"] {
+  width: 28px !important;
+  height: 18px !important;
+  padding: 0.2;
+  border: 1px solid #9afc97;
+  border-radius: 1px;
+  background: #1c1c1b;
+}
+.color-input-group input[type="range"] {
+  flex: 1;
+  height: 2px !important;
+  margin: 0;
+}
+.rgba-value {
+  font-size: 0.5rem !important;
+  text-align: center;
+  margin-top: 0.2rem;
+  font-family: monospace;
+  color: #9afc97;
+}
+
+/* Light mode adjustments */
+body.light-bg .picker-panel {
+  background: rgba(245, 243, 239, 0.95);
+  border-color: #2c6e2c;
+}
+body.light-bg .color-input-group input[type="color"] {
+  background: #f5f3ef;
+  border-color: #2c6e2c;
+}
+body.light-bg .rgba-value {
+  color: #2c6e2c;
+}
+/* Osm */
+  .toner-blend-layer {
+  mix-blend-mode: normal;
+}
+
+/* Wave grid and cards */
+.wave-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.wave-card {
+  border: 1px solid #9afc97;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  transition: background 0.2s ease;
+}
+
+.wave-canvas-container {
+  width: 100%;
+  height: 110px;
+  margin: 0.5rem 0;
+}
+
+/* Light mode adjustments */
+body.light-bg .wave-card {
+  border-color: #2c6e2c;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive: on smaller screens, switch to 2 columns then 1 */
+@media (max-width: 900px) {
+  .wave-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .wave-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Sound archive styles */
+.audio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.audio-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.audio-card h3{
+  font-size: 1.1rem;   /* adjust to your preference */
+  margin-bottom: 0.5rem;
+}
+
+.audio-description {
+  font-size: 0.4rem;
+  margin: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+body.light-bg .audio-description {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.audio-meta {
+  font-size: 0.7rem;
+  color: #141414;
+  margin: 0.5rem 0;
+}
+
+.audio-play-btn {
+  background: transparent;
+  border: 1px solid #9afc97;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 0.7rem;
+  font-family: monospace;
+  cursor: pointer;
+  color: inherit;
+  margin-top: 0.6rem;
+  align-self: flex-start;
+  transition: background 0.2s;
+}
+
+.audio-play-btn:hover {
+  background: rgba(154, 252, 151, 0.2);
+}
+
+body.light-bg .audio-play-btn {
+  border-color: #2c6e2c;
+  color: #2c6e2c;
+}
+
+.audio-card .spectrogram-container {
+  margin: 0.5rem 0;
+}
