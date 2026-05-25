@@ -29,8 +29,8 @@ export default function HomePage() {
     <div>
       <Header />
       <div className="container">
-        <h1>Aelectrosonic</h1>
-        <p>A: “pertaining to.” Electro-: electricity or electromagnetic phenomena. Sonic: sound waves.</p>
+        <h1>Spectral Ecologies</h1>
+        <p>Spectral: relating to spectra, frequencies, and forms of presence beyond immediate perception, from the electromagnetic spectrum to spectral traces and resonances. The animated bands correspond to frequencies within the electromagnetic spectrum, including L, S, and X bands commonly associated with radar, satellite, and sensing systems. The project investigates the ecological and atmospheric conditions produced through electromagnetic transmission, acoustic sensing, and migratory environments.</p>
         
         <div className="wave-grid">
           {bands.map((band) => (
