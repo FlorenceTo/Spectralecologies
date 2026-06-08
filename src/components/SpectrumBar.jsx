@@ -1,5 +1,5 @@
 // components/SpectrumBar.jsx
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 
 const bands = [
   { name: "HF", freq: "3–30 MHz", start: 0, color: "#ff0000" },
@@ -18,11 +18,6 @@ const bands = [
 
 export default function SpectrumBar({ onBandSelect }) {
   const canvasRef = useRef(null);
-  const [showText, setShowText] = useState(() => {
-    // Only show instruction text if user hasn't seen it before
-    return localStorage.getItem("spectrum_instruction_seen") !== "true";
-  });
-  let hideTimeout = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,13 +37,6 @@ export default function SpectrumBar({ onBandSelect }) {
   }, []);
 
   const handleTouchOrClick = (e) => {
-    // Fade out text on any interaction
-    if (hideTimeout.current) clearTimeout(hideTimeout.current);
-    setShowText(false);
-    // Mark that user has seen the instruction (so it won't show again on next visit)
-    localStorage.setItem("spectrum_instruction_seen", "true");
-
-    // Existing band selection logic
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
@@ -78,28 +66,26 @@ export default function SpectrumBar({ onBandSelect }) {
         ref={canvasRef}
         style={{ width: "100%", height: "30px", display: "block" }}
       />
-      {showText && (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "9px",
-            fontWeight: "bold",
-            color: "white",
-            textShadow: "none",
-            backgroundColor: "none",
-            padding: "2px 8px",
-            borderRadius: "0px",
-            whiteSpace: "nowrap",
-            pointerEvents: "none",
-            transition: "opacity 0.5s ease",
-          }}
-        >
-          ← lower frequency · tap spectrum → higher frequency
-        </div>
-      )}
+      {/* Instruction text – always visible */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          fontSize: "9px",
+          fontWeight: "normal",
+          color: "white",
+          textShadow: "1px 1px 0px rgba(0,0,0,0.7)",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          padding: "2px 8px",
+          borderRadius: "12px",
+          whiteSpace: "nowrap",
+          pointerEvents: "none",
+        }}
+      >
+        ← lower frequency · tap spectrum · higher frequency →
+      </div>
     </div>
   );
 }

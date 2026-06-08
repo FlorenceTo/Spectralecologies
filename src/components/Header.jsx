@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export default function Header() {
   const [showPicker, setShowPicker] = useState(false);
@@ -8,6 +8,11 @@ export default function Header() {
   const pickerRef = useRef(null);
   const hideTimeoutRef = useRef(null);
   const headerRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Mobile dropdown state
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   // Clock state
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -19,6 +24,17 @@ export default function Header() {
     { name: "Dark", bg: "#1c1c1b", light: false }
   ];
   const [presetIndex, setPresetIndex] = useState(0);
+
+  // Navigation items (label + path)
+  const navItems = [
+    { label: "Home", path: "/" },
+    { label: "Magnetic Fields", path: "/Conditions" },
+    { label: "Vulture Map", path: "/birdmap" },
+    { label: "Signal Loss", path: "/interference" },
+    { label: "Sonic Dispossession", path: "/archive-map" },
+    { label: "Interviews", path: "/interviews" },
+    { label: "Research Timeline", path: "/timeline" }
+  ];
 
   // Helper to extract hex and opacity from rgba string
   const rgbaToHexOpacity = (rgba) => {
@@ -43,7 +59,6 @@ export default function Header() {
       document.body.classList.remove('light-bg');
     }
     setBgColor(color);
-    // Save to localStorage
     localStorage.setItem('aelectrosonic_bg', color);
     localStorage.setItem('aelectrosonic_light', isLight ? 'true' : 'false');
     if (color.startsWith('rgba')) {
@@ -138,10 +153,49 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Hide header on swipe up (for short pages where scroll never triggers)
+  useEffect(() => {
+    if (window.innerWidth > 768) return;
+
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      touchEndY = e.touches[0].clientY;
+      const deltaY = touchEndY - touchStartY;
+      if (deltaY < -30 && headerRef.current && !headerRef.current.classList.contains('header-hidden')) {
+        headerRef.current.classList.add('header-hidden');
+      }
+      if (deltaY > 30 && headerRef.current && headerRef.current.classList.contains('header-hidden')) {
+        headerRef.current.classList.remove('header-hidden');
+      }
+    };
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
   // Live clock (24‑hour format)
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const formattedTime = currentTime.toLocaleTimeString([], {
@@ -158,7 +212,6 @@ export default function Header() {
     const savedHex = localStorage.getItem('aelectrosonic_hex');
     const savedOpacity = localStorage.getItem('aelectrosonic_opacity');
     if (savedBg && savedLight !== null) {
-      // Restore background
       document.body.style.backgroundColor = savedBg;
       if (savedLight === 'true') {
         document.body.classList.add('light-bg');
@@ -167,70 +220,128 @@ export default function Header() {
       }
       if (savedHex) setBgColor(savedHex);
       if (savedOpacity) setOpacity(parseFloat(savedOpacity));
-      // Try to match preset index
       const matchIndex = presets.findIndex(p => p.bg === savedBg);
       if (matchIndex !== -1) setPresetIndex(matchIndex);
     } else {
-      // Default Grey
       applyPreset(0);
     }
   }, []);
 
+  // Force dark mode on mobile devices (overrides saved colour on mobile)
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      applyPreset(2);
+    }
+  }, []);
+
+  // Handle dropdown navigation
+  const handleMobileNav = (e) => {
+    const path = e.target.value;
+    if (path) navigate(path);
+  };
+
   return (
     <header className="site-header" ref={headerRef}>
       <div className="nav-links">
-        {/* Left side: clock */}
+        {/* Left side: clock (desktop only) or dropdown (mobile) */}
         <div className="nav-left">
-          <div className="clock">{formattedTime}</div>
-        </div>
-
-        {/* Right side: Navigation + Color buttons */}
-        <div className="nav-right" style={{ display: "flex", gap: "1.5rem", alignItems: "center", position: "relative" }}>
-          <Link to="/">Home</Link>
-          <Link to="/timeline">Timeline</Link>
-          <Link to="/birdmap">Bird Map</Link>
-          <Link to="/archive">Sound Archive</Link>
-          <button className="color-btn" onClick={cyclePreset}>
-            {presets[presetIndex].name}
-          </button>
-          <button className="color-btn" onClick={togglePicker}>
-            Custom
-          </button>
-          {showPicker && (
-            <div className="picker-panel" ref={pickerRef} onMouseEnter={resetHideTimeout} onMouseLeave={() => setShowPicker(false)}>
-              <div className="color-input-group">
-                <label>Color:</label>
-                <input type="color" value={bgColor} onChange={(e) => handleCustomColorChange(e.target.value)} />
-              </div>
-              <div className="color-input-group">
-                <label>Opacity:</label>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={opacity}
-                  onChange={(e) => handleOpacityChange(parseFloat(e.target.value))}
-                  style={{
-                    width: "100%",
-                    accentColor: "#333333",
-                    height: "2px",
-                    borderRadius: "2px",
-                  }}
-                />
-              </div>
-              <div className="rgba-value">
-                {(() => {
-                  const r = parseInt(bgColor.slice(1,3), 16);
-                  const g = parseInt(bgColor.slice(3,5), 16);
-                  const b = parseInt(bgColor.slice(5,7), 16);
-                  return `rgba(${r}, ${g}, ${b}, ${opacity.toFixed(2)})`;
-                })()}
-              </div>
-            </div>
+          {!isMobile && <div className="clock">{formattedTime}</div>}
+          {isMobile && (
+            <select
+              className="mobile-nav-dropdown"
+              value={location.pathname}
+              onChange={handleMobileNav}
+            >
+              {navItems.map((item) => (
+                <option key={item.path} value={item.path}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
           )}
         </div>
+
+        {/* Right side: Navigation + Color buttons (desktop only) */}
+        {!isMobile && (
+          <div className="nav-right" style={{ display: "flex", gap: "1.5rem", alignItems: "center", position: "relative" }}>
+            <Link to="/">Home</Link>
+            <Link to="/Conditions">Magnetic Fields</Link>
+            <Link to="/birdmap">Vulture Map</Link>
+            <Link to="/interference">Signal Loss</Link>
+            <Link to="/archive-map">Sonic Dispossession</Link>
+            <Link to="/interviews">Interviews</Link>
+            <Link to="/timeline">Research Timeline</Link>
+            <button className="color-btn" onClick={cyclePreset}>
+              {presets[presetIndex].name}
+            </button>
+            <button className="color-btn" onClick={togglePicker}>
+              Custom
+            </button>
+            {showPicker && (
+              <div className="picker-panel" ref={pickerRef} onMouseEnter={resetHideTimeout} onMouseLeave={() => setShowPicker(false)}>
+                <div className="color-input-group">
+                  <label>Color:</label>
+                  <input type="color" value={bgColor} onChange={(e) => handleCustomColorChange(e.target.value)} />
+                </div>
+                <div className="color-input-group">
+                  <label>Opacity:</label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={opacity}
+                    onChange={(e) => handleOpacityChange(parseFloat(e.target.value))}
+                    style={{
+                      width: "100%",
+                      accentColor: "#333333",
+                      height: "2px",
+                      borderRadius: "2px",
+                    }}
+                  />
+                </div>
+                <div className="rgba-value">
+                  {(() => {
+                    const r = parseInt(bgColor.slice(1,3), 16);
+                    const g = parseInt(bgColor.slice(3,5), 16);
+                    const b = parseInt(bgColor.slice(5,7), 16);
+                    return `rgba(${r}, ${g}, ${b}, ${opacity.toFixed(2)})`;
+                  })()}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
+
+      {/* Additional styles for mobile dropdown – placed inside component so it's scoped */}
+      <style>{`
+        @media (max-width: 768px) {
+          .mobile-nav-dropdown {
+            background: transparent;
+            border: 1px solid #9afc97;
+            border-radius: 0;
+            padding: 0.3rem 0.5rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: inherit;
+            cursor: pointer;
+            margin-left: 0;
+          }
+          .mobile-nav-dropdown option {
+            background: #1c1c1b;
+            color: #9afc97;
+          }
+          body.light-bg .mobile-nav-dropdown {
+            border-color: #2c6e2c;
+            color: #2c6e2c;
+          }
+          body.light-bg .mobile-nav-dropdown option {
+            background: #f5f3ef;
+            color: #2c6e2c;
+          }
+        }
+      `}</style>
     </header>
   );
 }
