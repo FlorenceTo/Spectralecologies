@@ -25,8 +25,8 @@ export default function HomePage() {
     { name: "L-Band (1-2 GHz)", fullName: "L", color: "#cdfa05" },
     { name: "S-Band (2-4 GHz)", fullName: "S", color: "#0ceb00" },
     { name: "C-Band (4-8 GHz)", fullName: "C", color: "#00ffd9" },
-    { name: "X-Band (8-12 GHz)", fullName: "X", color: "#0926ff" },
-    { name: "Ku-Band (12-18 GHz)", fullName: "Ku", color: "#4800ff" },
+    { name: "X-Band (8-12 GHz)", fullName: "X", color: "#3044de" },
+    { name: "Ku-Band (12-18 GHz)", fullName: "Ku", color: "#6200ff" },
   ];
 
   const handleBandSelect = (shortName) => {
