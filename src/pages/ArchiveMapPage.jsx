@@ -72,7 +72,9 @@ export default function ArchiveMapPage() {
     setFieldNotesOpen(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
-  // SELECTED FILENAMES (edit as needed)
+  // ------------------------------------------------------------------
+  // SELECTED FILENAMES – edit this array to include only the recordings you want
+  // ------------------------------------------------------------------
   const SELECTED_FILENAMES = [
     "HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1352_1",
     "Hebron_312928.710N_351346.728E_510.99m_110126_1511_1",
@@ -88,7 +90,7 @@ export default function ArchiveMapPage() {
     "PNHM_Bethlehem_Soil_314304.5N_351221.4E_231225_1315_1",
   ];
 
-  // Load CSV
+  // Load and filter CSV
   useEffect(() => {
     const loadCSV = async () => {
       try {
