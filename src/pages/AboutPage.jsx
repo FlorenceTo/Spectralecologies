@@ -40,7 +40,7 @@ export default function AboutPage() {
           }}
         >
           <p style={{ margin: "0 0 1rem 0" }}>
-            Welcome to this page. You are here because I or a close friend shared with you this link. Spectral Ecologies is a private research space and not a public archive. I’d be grateful if you didn’t share the URL without asking. Thank you for your respect. If you’re interested in getting in touch or seeing my existing work, please visit{" "}
+            Welcome to this page. You are here because I or a friend shared this link with you. Spectral Ecologies is a private research space and not a public archive. I’d be grateful if you didn’t share the URL without asking. Thank you for your respect. If you’re interested in getting in touch or seeing my existing work, please visit{" "}
             <a 
               href="https://www.florence-to.com" 
               target="_blank" 
@@ -53,10 +53,6 @@ export default function AboutPage() {
 
           <p style={{ margin: "0 0 1rem 0" }}>
             <em>Spectral Ecologies</em> is a long‑term artistic research project that listens to the intersection of sound, ecology, and politics as they unfold in site‑specific places. The archive includes recordings from Hebron, Jericho, Haifa, and other locations. Each audio file is accompanied by a spectrogram and field notes. The map interface allows you to explore the sonic geography of the region.
-          </p>
-
-          <p style={{ margin: 0 }}>
-            <strong>Magnetic Fields – Florence To (2025)</strong>
           </p>
         </div>
       </div>
