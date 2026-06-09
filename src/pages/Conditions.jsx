@@ -67,7 +67,7 @@ export default function ConditionsPage() {
             fontWeight: "inherit",
             letterSpacing: "inherit",
             lineHeight: "inherit",
-            color: "inherit",
+            color: "#ffffff",
           }}>
             Magnetic Fields by Florence To
           </p>
