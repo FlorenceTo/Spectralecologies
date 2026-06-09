@@ -20,20 +20,34 @@ export default function SpectrumBar({ onBandSelect }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    const width = canvas.clientWidth;
-    canvas.width = width;
+    // Function to draw the gradient on the canvas
+    const drawCanvas = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const width = canvas.clientWidth;
+      canvas.width = width;
+      const height = canvas.clientHeight;
+      
+      // Smooth gradient with many color stops
+      const grad = ctx.createLinearGradient(0, 0, width, 0);
+      bands.forEach((band, i) => {
+        const nextStart = bands[i+1]?.start || 1;
+        grad.addColorStop(band.start, band.color);
+        grad.addColorStop(nextStart, bands[i+1]?.color || band.color);
+      });
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, width, height);
+    };
+
+    // Draw initially
+    drawCanvas();
+
+    // Redraw on window resize
+    window.addEventListener("resize", drawCanvas);
     
-    // Smooth gradient with many color stops
-    const grad = ctx.createLinearGradient(0, 0, width, 0);
-    bands.forEach((band, i) => {
-      const nextStart = bands[i+1]?.start || 1;
-      grad.addColorStop(band.start, band.color);
-      grad.addColorStop(nextStart, bands[i+1]?.color || band.color);
-    });
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, width, canvas.height);
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", drawCanvas);
   }, []);
 
   const handleTouchOrClick = (e) => {
