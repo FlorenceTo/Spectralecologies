@@ -69,7 +69,7 @@ export default function ConditionsPage() {
             width: "100%",
             backgroundColor: "#000",
             border: `1px solid ${borderColor}`,
-            borderRadius: "4px",
+            borderRadius: "0px",
             overflow: "hidden",
           }}
         >
@@ -92,7 +92,7 @@ export default function ConditionsPage() {
             marginTop: "2rem",
             width: "100%",
             border: `1px solid ${borderColor}`,
-            borderRadius: "4px",
+            borderRadius: "0px",
             overflow: "hidden",
             backgroundColor: "#fff",
           }}
@@ -110,7 +110,7 @@ export default function ConditionsPage() {
             marginTop: "2rem",
             width: "100%",
             border: `1px solid ${borderColor}`,
-            borderRadius: "4px",
+            borderRadius: "0px",
             overflow: "hidden",
             backgroundColor: "#fff",
           }}
@@ -128,7 +128,7 @@ export default function ConditionsPage() {
             marginTop: "2rem",
             width: "100%",
             border: `1px solid ${borderColor}`,
-            borderRadius: "4px",
+            borderRadius: "0px",
             overflow: "hidden",
             backgroundColor: "#fff",
           }}
