@@ -34,7 +34,8 @@ export default function ConditionsPage() {
   const textColor = borderColor;
   const backgroundColor = theme === "light" ? "rgba(245, 243, 239, 0.95)" : "rgba(0, 0, 0, 0.3)";
 
-  const paragraphText = `Magnetic Fields by Florence To\n\nA landscape rarely changes all at once. The first signs arrive in places that are difficult to name: in the air before weather turns, in the altered timing of a bird's return, in the thinning of a sound that once held a place. Before anything can be identified, something is already felt. A route once known begins to feel unsettled; the horizon remains unchanged, yet the relations that gave it meaning seem to have shifted just out of reach. Frequencies move continuously through air, soil, water, and living systems. Some register as sound or vibration; others remain imperceptible, shaping conditions beyond the limits of attention. Birds navigate through magnetic fields, pressure, temperature, memory, and seasonal cycles. When these rhythms are disturbed, silence gathers where density once held and continuity begins to loosen. The landscape registers these shifts through response: a bird veers, a soundscape thins, a body senses unease before it can explain why. What disappears does not vanish entirely. It leaves traces in movement, interruption, and altered relation. These traces ripple beyond ecology into everyday life, shaping how we orient ourselves, move through space, and make sense of the worlds we inhabit. What is sensed in the field is not separate from lived conditions, but part of a shared atmosphere in which ecological, technological, and human forms of life are entangled, and where shifts in one register quietly reorganise the possibilities of another.`;
+  // Main paragraph text (without subtitle)
+  const paragraphText = `A landscape rarely changes all at once. The first signs arrive in places that are difficult to name: in the air before weather turns, in the altered timing of a bird's return, in the thinning of a sound that once held a place. Before anything can be identified, something is already felt. A route once known begins to feel unsettled; the horizon remains unchanged, yet the relations that gave it meaning seem to have shifted just out of reach. Frequencies move continuously through air, soil, water, and living systems. Some register as sound or vibration; others remain imperceptible, shaping conditions beyond the limits of attention. Birds navigate through magnetic fields, pressure, temperature, memory, and seasonal cycles. When these rhythms are disturbed, silence gathers where density once held and continuity begins to loosen. The landscape registers these shifts through response: a bird veers, a soundscape thins, a body senses unease before it can explain why. What disappears does not vanish entirely. It leaves traces in movement, interruption, and altered relation. These traces ripple beyond ecology into everyday life, shaping how we orient ourselves, move through space, and make sense of the worlds we inhabit. What is sensed in the field is not separate from lived conditions, but part of a shared atmosphere in which ecological, technological, and human forms of life are entangled, and where shifts in one register quietly reorganise the possibilities of another.`;
 
   return (
     <div>
@@ -59,7 +60,22 @@ export default function ConditionsPage() {
             transition: "opacity 1000ms ease",
           }}
         >
-          <p style={{ margin: 0, paddingBottom: "0.5rem" }}>{paragraphText}</p>
+          {/* Subtitle – on its own row, same styling as paragraph */}
+          <p style={{
+            margin: "0 0 0.5rem 0",
+            fontSize: "inherit",
+            fontWeight: "inherit",
+            letterSpacing: "inherit",
+            lineHeight: "inherit",
+            color: "inherit",
+          }}>
+            Magnetic Fields by Florence To
+          </p>
+
+          {/* Main paragraph */}
+          <p style={{ margin: 0, paddingBottom: "0.5rem" }}>
+            {paragraphText}
+          </p>
         </div>
 
         {/* Video player */}
