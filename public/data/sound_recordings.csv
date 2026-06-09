@@ -1,33 +1,33 @@
 location,city_region,jurisdiction,country,recording_type,latitude_decimal,longitude_decimal,altitude_m,date,time,version,filename
-HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,2026-01-04,13:41,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1341_1
-HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,2026-01-04,13:42,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1342_1
-HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,2026-01-04,13:52,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1352_1
-HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,2026-01-04,13:55,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1355_1
-HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,2026-01-04,13:59,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1359_1
-HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,2026-01-04,14:08,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1408_1
-Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,,31.491308,35.229647,510.99,2026-01-11,15:11,1,Hebron_312928.710N_351346.728E_510.99m_110126_1511_1
-Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,,31.491308,35.229647,510.99,2026-01-11,15:14,1,Hebron_312928.710N_351346.728E_510.99m_110126_1514_1
-Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,,31.491308,35.229647,510.99,2026-01-11,15:28,1,Hebron_312928.710N_351346.728E_510.99m_110126_1528_1
-Hebron,Al Bueib Masafer,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.490033,35.20517,530.15,2026-01-11,17:09,1,Hebron_Al_Bueib_Masafer_EMF_312924.120N_351218.612E_530.15m_110126_1709_1
-Hebron,Al Bueib Masafer,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Geo,31.490033,35.20517,530.15,2026-01-11,17:17,1,Hebron_Al_Bueib_Masafer_Geo_312924.120N_351218.612E_530.15m_110126_1717_1
-Hebron,Al Bueib Masafer,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Geo,31.490033,35.20517,530.15,2026-01-11,17:18,1,Hebron_Al_Bueib_Masafer_Geo_312924.120N_351218.612E_530.15m_110126_1718_1
-Hebron,Al Bueib Masafer,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Geo,31.490033,35.20517,530.15,2026-01-11,17:21,1,Hebron_Al_Bueib_Masafer_Geo_312924.120N_351218.612E_530.15m_110126_1721_1
-Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.49003,35.20517,532.3,2026-01-11,15:37,1,Hebron_EMF_312924.108N_351218.612E_532.30m_110126_1537_1
-Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Geomic,31.491308,35.229647,510.99,2026-01-11,16:22,1,Hebron_Geomic_312928.710N_351346.728E_510.99m_110126_1622_1
-Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Soma_Geomic,31.491308,35.229647,510.99,2026-01-11,16:34,1,Hebron_Soma_Geomic_312928.710N_351346.728E_510.99m_110126_1634_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,,32.072767,35.49765,-275.59,2026-01-17,12:38,1,Jericho__32421.960N_352951.540E_-275.59m_170126_1238_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,,32.072767,35.49765,-275.59,2026-01-17,12:55,1,Jericho__32421.960N_352951.540E_-275.59m_170126_1255_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,EMF,32.072767,35.49765,-275.59,2026-01-17,12:57,1,Jericho__EMF_32421.960N_352951.540E_-275.59m_170126_1257_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.845178,35.426163,8.24,2026-01-17,08:13,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0813_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.845178,35.426163,8.24,2026-01-17,08:14,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0814_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.845178,35.426163,8.24,2026-01-17,08:15,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0815_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.845178,35.426163,8.24,2026-01-17,08:18,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0818_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.845178,35.426163,8.24,2026-01-17,08:22,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0822_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.845178,35.426163,8.24,2026-01-17,08:24,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0824_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.845178,35.426163,8.24,2026-01-17,08:30,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0830_1
-Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,EMF,31.845178,35.426163,8.24,2026-01-17,12:57,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_1257_1
-Jericho,Dead Sea / Jericho Basin,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Mic_EMF,32.072767,35.49765,-275.59,2026-01-17,12:57,1,Jericho__Mic_EMF_32421.960N_352951.540E_-275.59m_170126_1257_1
-Ma'agan Mikha'el,Jisr az-Zarqa / Carmel Coast,Haifa District,Israel,Coastal,32.549528,34.913737,6.72,2026-01-06,09:18,1,Ma'agan_Mikha'el_Jzralzarqa_323258.302N_345449.452E_6.72m_060126_0918_1
-Ma'agan Mikha'el,Jisr az-Zarqa / Carmel Coast,Haifa District,Israel,Coastal,32.549528,34.913737,6.72,2026-01-06,09:20,1,Ma'agan_Mikha'el_Jzralzarqa_323258.302N_345449.452E_6.72m_060126_0920_1
-PNHM,Bethlehem,Bethlehem Governorate,State of Palestine / Occupied Palestinian Territories,Field,31.717917,35.205944,,2025-12-23,13:18,1,PNHM_Bethlehem_314304.5N_351221.4E_231225_1318_1
-PNHM,Bethlehem,Bethlehem Governorate,State of Palestine / Occupied Palestinian Territories,Soil,31.717917,35.205944,,2025-12-23,13:15,1,PNHM_Bethlehem_Soil_314304.5N_351221.4E_231225_1315_1
+HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,04/01/2026,13:41,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1341_1
+HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,04/01/2026,13:42,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1342_1
+HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,04/01/2026,13:52,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1352_1
+HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,04/01/2026,13:55,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1355_1
+HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,04/01/2026,13:59,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1359_1
+HCarmel,Haifa,Haifa District,Israel,Soil,32.75778,35.20255,436.98,04/01/2026,14:08,1,HCarmel_Haifa_Nesher_Soil_324528008N_35129.180E_436.98m_040126_1408_1
+Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Air,31.491308,35.229647,510.99,11/01/2026,15:11,1,Hebron_312928.710N_351346.728E_510.99m_110126_1511_1
+Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Air,31.491308,35.229647,510.99,11/01/2026,15:14,1,Hebron_312928.710N_351346.728E_510.99m_110126_1514_1
+Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Air,31.491308,35.229647,510.99,11/01/2026,15:28,1,Hebron_312928.710N_351346.728E_510.99m_110126_1528_1
+Hebron,Al Bueib Masafer,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.490033,35.20517,530.15,11/01/2026,17:09,1,Hebron_Al_Bueib_Masafer_EMF_312924.120N_351218.612E_530.15m_110126_1709_1
+Hebron,Al Bueib Masafer,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Ground,31.490033,35.20517,530.15,11/01/2026,17:17,1,Hebron_Al_Bueib_Masafer_Geo_312924.120N_351218.612E_530.15m_110126_1717_1
+Hebron,Al Bueib Masafer,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Ground,31.490033,35.20517,530.15,11/01/2026,17:18,1,Hebron_Al_Bueib_Masafer_Geo_312924.120N_351218.612E_530.15m_110126_1718_1
+Hebron,Al Bueib Masafer,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Ground,31.490033,35.20517,530.15,11/01/2026,17:21,1,Hebron_Al_Bueib_Masafer_Geo_312924.120N_351218.612E_530.15m_110126_1721_1
+Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.49003,35.20517,532.3,11/01/2026,15:37,1,Hebron_EMF_312924.108N_351218.612E_532.30m_110126_1537_1
+Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Ground,31.491308,35.229647,510.99,11/01/2026,16:22,1,Hebron_Geomic_312928.710N_351346.728E_510.99m_110126_1622_1
+Hebron,Hebron,Hebron Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic + Ground,31.491308,35.229647,510.99,11/01/2026,16:34,1,Hebron_Soma_Geomic_312928.710N_351346.728E_510.99m_110126_1634_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Air,32.072767,35.49765,-275.59,17/01/2026,12:38,1,Jericho__32421.960N_352951.540E_-275.59m_170126_1238_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Air,32.072767,35.49765,-275.59,17/01/2026,12:55,1,Jericho__32421.960N_352951.540E_-275.59m_170126_1255_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,32.072767,35.49765,-275.59,17/01/2026,12:57,1,Jericho__EMF_32421.960N_352951.540E_-275.59m_170126_1257_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.845178,35.426163,8.24,17/01/2026,08:13,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0813_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.845178,35.426163,8.24,17/01/2026,08:14,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0814_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.845178,35.426163,8.24,17/01/2026,08:15,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0815_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.845178,35.426163,8.24,17/01/2026,08:18,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0818_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.845178,35.426163,8.24,17/01/2026,08:22,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0822_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.845178,35.426163,8.24,17/01/2026,08:24,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0824_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.845178,35.426163,8.24,17/01/2026,08:30,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_0830_1
+Jericho,Jericho,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Electromagnetic,31.845178,35.426163,8.24,17/01/2026,12:57,1,Jericho__EMF_315042.642N_352534.188E_8.24m_170126_1257_1
+Jericho,Dead Sea / Jericho Basin,Jericho Governorate,State of Palestine / Occupied Palestinian Territories,Air + Ground,32.072767,35.49765,-275.59,17/01/2026,12:57,1,Jericho__Mic_EMF_32421.960N_352951.540E_-275.59m_170126_1257_1
+Ma'agan Mikha'el,Jisr az-Zarqa / Carmel Coast,Haifa District,Israel,Air,32.549528,34.913737,6.72,06/01/2026,09:18,1,Ma'agan_Mikha'el_Jzralzarqa_323258.302N_345449.452E_6.72m_060126_0918_1
+Ma'agan Mikha'el,Jisr az-Zarqa / Carmel Coast,Haifa District,Israel,Air,32.549528,34.913737,6.72,06/01/2026,09:20,1,Ma'agan_Mikha'el_Jzralzarqa_323258.302N_345449.452E_6.72m_060126_0920_1
+PNHM,Bethlehem,Bethlehem Governorate,State of Palestine / Occupied Palestinian Territories,Air,31.717917,35.205944,,23/12/2025,13:18,1,PNHM_Bethlehem_314304.5N_351221.4E_231225_1318_1
+PNHM,Bethlehem,Bethlehem Governorate,State of Palestine / Occupied Palestinian Territories,Soil,31.717917,35.205944,,23/12/2025,13:15,1,PNHM_Bethlehem_Soil_314304.5N_351221.4E_231225_1315_1
