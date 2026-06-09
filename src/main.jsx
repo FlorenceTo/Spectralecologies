@@ -20,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/timeline" element={<TimelinePage />} />
         <Route path="/birdmap" element={<BirdMapPage />} />
         <Route path="/interference" element={<InterferencePage />} />
-        <Route path="/conditions" element={<ConditionsPage />} />
+        <Route path="/ecosemiotics" element={<ConditionsPage />} />
         <Route path="/archive-map" element={<ArchiveMapPage />} />
         <Route path="/interviews" element={<InterviewPage />} />
       </Routes>

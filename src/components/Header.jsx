@@ -265,7 +265,7 @@ export default function Header() {
         {!isMobile && (
           <div className="nav-right" style={{ display: "flex", gap: "1.5rem", alignItems: "center", position: "relative" }}>
             <Link to="/">Home</Link>
-            <Link to="/Conditions">Magnetic Fields</Link>
+            <Link to="/ecosemiotics">Ecosemiotics</Link>
             <Link to="/birdmap">Vulture Map</Link>
             <Link to="/interference">Signal Loss</Link>
             <Link to="/archive-map">Sonic Dispossession</Link>
