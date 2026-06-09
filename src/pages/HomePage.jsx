@@ -87,7 +87,7 @@ export default function HomePage() {
           border: 1px solid #9afc97;
           background: rgba(0, 0, 0, 0.2);
           padding: 1rem;
-          border-radius: 8px;
+          border-radius: 0px;
           transition: all 0.2s ease;
           /* Ensure all cards have same height */
           display: flex;
