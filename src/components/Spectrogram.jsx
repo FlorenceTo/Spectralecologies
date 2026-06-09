@@ -1,36 +1,43 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function Spectrogram({ audioElement, theme }) {
-  const specCanvasRef = useRef(null);
-  const waveCanvasRef = useRef(null);
+export default function Spectrogram({ audioElement, isPlaying, theme }) {
+  const canvasRef = useRef(null);
+  const waveformCanvasRef = useRef(null);
   const animationRef = useRef();
   const analyserRef = useRef(null);
   const sourceRef = useRef(null);
   const contextRef = useRef(null);
   const imageDataRef = useRef(null);
-  const isPlayingRef = useRef(false);
-  const currentAudioRef = useRef(null);
+  const [dynamicRange, setDynamicRange] = useState(18); // dB range (0-35)
+  const [cropToEnergy, setCropToEnergy] = useState(true); // fill width by cropping empty high freqs
 
+  // Inferno colour map (dark → bright)
   const amplitudeToColor = (value) => {
-    const t = Math.min(1, Math.max(0, value));
-    const r = Math.floor(255 * t);
-    const g = Math.floor(80 * t);
-    const b = Math.floor(40 * t);
-    return [r, g, b];
+    if (value < 0.2) {
+      const t = value / 0.2;
+      return [Math.floor(20 * t), 0, Math.floor(50 * t)];
+    } else if (value < 0.5) {
+      const t = (value - 0.2) / 0.3;
+      return [Math.floor(80 + 120 * t), Math.floor(20 * t), Math.floor(50 * (1 - t))];
+    } else if (value < 0.8) {
+      const t = (value - 0.5) / 0.3;
+      return [200, Math.floor(100 + 155 * t), 0];
+    } else {
+      const t = (value - 0.8) / 0.2;
+      return [255, Math.floor(255 - 50 * t), Math.floor(50 - 50 * t)];
+    }
   };
 
-  // Initialize audio context and source once
+  // Set up AudioContext once
   useEffect(() => {
     if (!audioElement) return;
-    if (contextRef.current) return; // already initialized
-
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     const context = new AudioContext();
     contextRef.current = context;
     const source = context.createMediaElementSource(audioElement);
     sourceRef.current = source;
     const analyser = context.createAnalyser();
-    analyser.fftSize = 256;
+    analyser.fftSize = 512;
     analyserRef.current = analyser;
     source.connect(analyser);
     analyser.connect(context.destination);
@@ -42,43 +49,18 @@ export default function Spectrogram({ audioElement, theme }) {
       if (contextRef.current && contextRef.current.state !== "closed") {
         contextRef.current.close();
       }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
   }, [audioElement]);
 
-  // Reset spectrogram when audio element changes
+  // Animation loop
   useEffect(() => {
-    if (currentAudioRef.current === audioElement) return;
-    currentAudioRef.current = audioElement;
+    if (!canvasRef.current || !waveformCanvasRef.current || !analyserRef.current) return;
 
-    // Clear image data
-    if (specCanvasRef.current) {
-      const canvas = specCanvasRef.current;
-      const ctx = canvas.getContext("2d");
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
-      canvas.width = w;
-      canvas.height = h;
-      const imageData = ctx.createImageData(w, h);
-      for (let i = 0; i < imageData.data.length; i += 4) {
-        imageData.data[i] = 0;
-        imageData.data[i+1] = 0;
-        imageData.data[i+2] = 0;
-        imageData.data[i+3] = 255;
-      }
-      ctx.putImageData(imageData, 0, 0);
-      imageDataRef.current = imageData;
-    }
-  }, [audioElement]);
-
-  // Start drawing loop
-  useEffect(() => {
-    if (!specCanvasRef.current || !waveCanvasRef.current) return;
-
-    const specCanvas = specCanvasRef.current;
+    const specCanvas = canvasRef.current;
     const specCtx = specCanvas.getContext("2d");
-    const waveCanvas = waveCanvasRef.current;
+    const waveCanvas = waveformCanvasRef.current;
     const waveCtx = waveCanvas.getContext("2d");
-
     let specWidth, specHeight, waveWidth, waveHeight;
 
     const resize = () => {
@@ -90,127 +72,135 @@ export default function Spectrogram({ audioElement, theme }) {
       waveHeight = waveCanvas.clientHeight;
       waveCanvas.width = waveWidth;
       waveCanvas.height = waveHeight;
-
-      // Reinitialize image data on resize
-      if (imageDataRef.current) {
-        const newImageData = specCtx.createImageData(specWidth, specHeight);
-        // copy old data? not necessary, just reset
-        for (let i = 0; i < newImageData.data.length; i += 4) {
-          newImageData.data[i] = 0;
-          newImageData.data[i+1] = 0;
-          newImageData.data[i+2] = 0;
-          newImageData.data[i+3] = 255;
-        }
-        imageDataRef.current = newImageData;
-        specCtx.putImageData(newImageData, 0, 0);
-      } else {
-        const imageData = specCtx.createImageData(specWidth, specHeight);
-        for (let i = 0; i < imageData.data.length; i += 4) {
-          imageData.data[i] = 0;
-          imageData.data[i+1] = 0;
-          imageData.data[i+2] = 0;
-          imageData.data[i+3] = 255;
-        }
-        specCtx.putImageData(imageData, 0, 0);
-        imageDataRef.current = imageData;
+      // initialise image data (black)
+      const imageData = specCtx.createImageData(specWidth, specHeight);
+      for (let i = 0; i < imageData.data.length; i += 4) {
+        imageData.data[i] = 0;
+        imageData.data[i+1] = 0;
+        imageData.data[i+2] = 0;
+        imageData.data[i+3] = 255;
       }
+      specCtx.putImageData(imageData, 0, 0);
+      imageDataRef.current = imageData;
     };
     window.addEventListener("resize", resize);
     resize();
 
-    const draw = () => {
-      if (!analyserRef.current) {
+    const analyser = analyserRef.current;
+    const fullBufferLength = analyser.frequencyBinCount; // = 256
+    const freqData = new Uint8Array(fullBufferLength);
+    const timeData = new Uint8Array(analyser.fftSize);
+
+    const findLastNonEmptyBin = () => {
+      for (let i = fullBufferLength - 1; i >= 0; i--) {
+        if (freqData[i] > 5) return i + 1;
+      }
+      return 64;
+    };
+    let lastNonEmpty = 64;
+
+    const draw = async () => {
+      if (!isPlaying) {
         animationRef.current = requestAnimationFrame(draw);
         return;
       }
 
-      if (isPlayingRef.current) {
-        const analyser = analyserRef.current;
-        const bufferLength = analyser.frequencyBinCount;
-        const freqData = new Uint8Array(bufferLength);
-        const timeData = new Uint8Array(analyser.fftSize);
-        analyser.getByteFrequencyData(freqData);
-        analyser.getByteTimeDomainData(timeData);
-
-        // Shift spectrogram
-        const rowWidth = specWidth * 4;
-        for (let y = 1; y < specHeight; y++) {
-          const srcStart = y * rowWidth;
-          const destStart = (y - 1) * rowWidth;
-          imageDataRef.current.data.copyWithin(destStart, srcStart, srcStart + rowWidth);
-        }
-        // Add new row
-        const bottomRowStart = (specHeight - 1) * rowWidth;
-        for (let x = 0; x < specWidth; x++) {
-          const freqIndex = Math.floor((x / specWidth) * bufferLength);
-          const amp = freqData[freqIndex] / 255;
-          const [r, g, b] = amplitudeToColor(amp);
-          const pos = bottomRowStart + x * 4;
-          imageDataRef.current.data[pos] = r;
-          imageDataRef.current.data[pos+1] = g;
-          imageDataRef.current.data[pos+2] = b;
-        }
-        specCtx.putImageData(imageDataRef.current, 0, 0);
-
-        // Draw waveform
-        waveCtx.clearRect(0, 0, waveWidth, waveHeight);
-        waveCtx.beginPath();
-        waveCtx.strokeStyle = theme === "light" ? "#333333" : "#9afc97";
-        waveCtx.lineWidth = 1.5;
-        const step = waveWidth / timeData.length;
-        for (let i = 0; i < timeData.length; i++) {
-          const x = i * step;
-          const y = waveHeight / 2 + (timeData[i] - 128) / 128 * (waveHeight / 2 - 4);
-          if (i === 0) waveCtx.moveTo(x, y);
-          else waveCtx.lineTo(x, y);
-        }
-        waveCtx.stroke();
+      if (contextRef.current && contextRef.current.state === "suspended") {
+        await contextRef.current.resume();
       }
+
+      analyser.getByteFrequencyData(freqData);
+      analyser.getByteTimeDomainData(timeData);
+
+      if (cropToEnergy) {
+        const newLast = findLastNonEmptyBin();
+        if (newLast > 10) lastNonEmpty = newLast;
+      }
+      const usedBins = cropToEnergy ? Math.max(32, lastNonEmpty) : fullBufferLength;
+      const step = usedBins / specWidth;
+
+      // Shift spectrogram upward
+      const rowWidth = specWidth * 4;
+      for (let y = 1; y < specHeight; y++) {
+        const srcStart = y * rowWidth;
+        const destStart = (y - 1) * rowWidth;
+        imageDataRef.current.data.copyWithin(destStart, srcStart, srcStart + rowWidth);
+      }
+
+      // Draw new bottom row (frequency slice)
+      const bottomRowStart = (specHeight - 1) * rowWidth;
+      for (let x = 0; x < specWidth; x++) {
+        const freqIndex = Math.floor(x * step);
+        const linearAmp = freqData[freqIndex] / 255;
+        let db = 20 * Math.log10(linearAmp + 1e-6);
+        const minDb = -dynamicRange;
+        const maxDb = 0;
+        let normalized = (db - minDb) / (maxDb - minDb);
+        normalized = Math.min(1, Math.max(0, normalized));
+        const [r, g, b] = amplitudeToColor(normalized);
+        const pos = bottomRowStart + x * 4;
+        imageDataRef.current.data[pos] = r;
+        imageDataRef.current.data[pos+1] = g;
+        imageDataRef.current.data[pos+2] = b;
+      }
+      specCtx.putImageData(imageDataRef.current, 0, 0);
+
+      // Draw waveform
+      waveCtx.clearRect(0, 0, waveWidth, waveHeight);
+      waveCtx.beginPath();
+      waveCtx.strokeStyle = theme === "light" ? "#333333" : "#9afc97";
+      waveCtx.lineWidth = 1.5;
+      const stepWave = waveWidth / timeData.length;
+      for (let i = 0; i < timeData.length; i++) {
+        const x = i * stepWave;
+        const y = waveHeight / 2 + (timeData[i] - 128) / 128 * (waveHeight / 2 - 4);
+        if (i === 0) waveCtx.moveTo(x, y);
+        else waveCtx.lineTo(x, y);
+      }
+      waveCtx.stroke();
+
       animationRef.current = requestAnimationFrame(draw);
     };
+
     draw();
 
     return () => {
       window.removeEventListener("resize", resize);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [theme]);
-
-  // Attach play/pause listeners
-  useEffect(() => {
-    if (!audioElement) return;
-
-    const handlePlay = async () => {
-      isPlayingRef.current = true;
-      if (contextRef.current && contextRef.current.state === "suspended") {
-        await contextRef.current.resume();
-      }
-    };
-    const handlePause = () => {
-      isPlayingRef.current = false;
-    };
-    const handleEnded = () => {
-      isPlayingRef.current = false;
-    };
-
-    audioElement.addEventListener("play", handlePlay);
-    audioElement.addEventListener("pause", handlePause);
-    audioElement.addEventListener("ended", handleEnded);
-
-    return () => {
-      audioElement.removeEventListener("play", handlePlay);
-      audioElement.removeEventListener("pause", handlePause);
-      audioElement.removeEventListener("ended", handleEnded);
-    };
-  }, [audioElement]);
+  }, [isPlaying, theme, dynamicRange, cropToEnergy]);
 
   return (
     <div style={{ width: "100%", marginTop: "0.5rem" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginBottom: "0.25rem", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.65rem", fontFamily: "monospace" }}>
+          <span>Dynamic range:</span>
+          <input
+            type="range"
+            min="0"
+            max="35"
+            step="1"
+            value={dynamicRange}
+            onChange={(e) => setDynamicRange(parseInt(e.target.value))}
+            style={{ width: "100px", accentColor: "#555", height: "2px", borderRadius: "2px" }}
+          />
+          <span>{dynamicRange} dB</span>
+        </div>
+        <label style={{ fontSize: "0.65rem", fontFamily: "monospace", display: "flex", alignItems: "center", gap: "0.3rem" }}>
+          <input
+            type="checkbox"
+            checked={cropToEnergy}
+            onChange={(e) => setCropToEnergy(e.target.checked)}
+            style={{ accentColor: "#555" }}
+          />
+          Fill width (crop empty high frequencies)
+        </label>
+      </div>
       <div style={{ marginBottom: "0.25rem", fontSize: "0.65rem", fontFamily: "monospace", opacity: 0.7 }}>
         waveform (amplitude) · spectrogram (frequency)
       </div>
       <canvas
-        ref={waveCanvasRef}
+        ref={waveformCanvasRef}
         style={{
           width: "100%",
           height: "40px",
@@ -219,13 +209,13 @@ export default function Spectrogram({ audioElement, theme }) {
         }}
       />
       <canvas
-        ref={specCanvasRef}
+        ref={canvasRef}
         style={{
           width: "100%",
-          height: "100px",
+          height: "120px",
           backgroundColor: theme === "light" ? "#eaeaea" : "#1a1a1a",
           display: "block",
-          marginTop: "1px",
+          marginTop: "2px",
         }}
       />
     </div>
