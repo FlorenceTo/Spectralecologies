@@ -264,6 +264,7 @@ export default function Header() {
         {/* Right side: Navigation + Color buttons (desktop only) */}
         {!isMobile && (
           <div className="nav-right" style={{ display: "flex", gap: "1.5rem", alignItems: "center", position: "relative" }}>
+            <Link to="/about">About</Link>
             <Link to="/">Home</Link>
             <Link to="/ecosemiotics">Ecosemiotics</Link>
             <Link to="/birdmap">Vulture Map</Link>

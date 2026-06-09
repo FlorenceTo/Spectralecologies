@@ -10,6 +10,7 @@ import InterferencePage from "./pages/InterferencePage";
 import ConditionsPage from "./pages/Conditions";
 import ArchiveMapPage from "./pages/ArchiveMapPage";
 import InterviewPage from "./pages/InterviewPage";
+import AboutPage from "./pages/AboutPage";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/ecosemiotics" element={<ConditionsPage />} />
         <Route path="/archive-map" element={<ArchiveMapPage />} />
         <Route path="/interviews" element={<InterviewPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </HashRouter>
   </React.StrictMode>
