@@ -87,7 +87,7 @@ export default function SpectrumBar({ onBandSelect }) {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          fontSize: "9px",
+          fontSize: "11px",
           fontWeight: "normal",
           color: "white",
           textShadow: "1px 1px 0px rgba(0,0,0,0.7)",
