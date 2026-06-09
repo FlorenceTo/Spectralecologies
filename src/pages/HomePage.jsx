@@ -79,7 +79,7 @@ export default function HomePage() {
         }
         .wave-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          grid-template-columns: repeat(3, 1fr); /* exactly 3 columns on desktop */
           gap: 1.5rem;
           margin-top: 2rem;
         }
@@ -89,6 +89,9 @@ export default function HomePage() {
           padding: 1rem;
           border-radius: 8px;
           transition: all 0.2s ease;
+          /* Ensure all cards have same height */
+          display: flex;
+          flex-direction: column;
         }
         .wave-card.highlight {
           border: 2px solid #ffd700;
@@ -101,6 +104,7 @@ export default function HomePage() {
         .wave-canvas-container {
           width: 100%;
           height: 100px;
+          flex-shrink: 0;
         }
         body.light-bg .wave-card {
           border-color: #2c6e2c;
@@ -110,7 +114,16 @@ export default function HomePage() {
           border-color: #ff8c00;
           box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
         }
-        @media (max-width: 768px) {
+
+        /* Tablet: 2 columns */
+        @media (max-width: 900px) {
+          .wave-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        /* Mobile: 1 column */
+        @media (max-width: 600px) {
           .wave-grid {
             grid-template-columns: 1fr;
           }
