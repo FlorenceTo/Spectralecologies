@@ -413,8 +413,8 @@ export default function BirdTracker() {
           </div>
 
           <div className="map-wrapper" style={{ border: "1px solid #9afc97" }}>
+            {/* SINGLE MAP CONTAINER – no key, stable across modes */}
             <MapContainer
-              key={`single-${selectedBirdId}`}
               center={mapCenter}
               zoom={mapZoom}
               style={{ height: "400px", width: "100%" }}
@@ -424,32 +424,13 @@ export default function BirdTracker() {
               {/* Base satellite layer */}
               <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
 
-              {/* English street map (labels + streets) */}
+              {/* Soft, Arabic‑friendly label layer (CartoDB Positron labels only) – open source */}
               <TileLayer
-                attribution='Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ'
-                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png"
                 opacity={labelOpacityRef.current}
                 ref={labelLayerRef}
               />
-
-              {/* Bird trail and start dot */}
-              <Polyline
-                positions={trail}
-                color={currentColor}
-                weight={0.8}
-                opacity={0.9}
-              />
-              {firstPoint && (
-                <CircleMarker
-                  center={[firstPoint.lat, firstPoint.lng]}
-                  radius={4}
-                  fillColor={currentColor}
-                  color={currentColor}
-                  weight={1}
-                  opacity={0.8}
-                  fillOpacity={1}
-                />
-              )}
 
               {/* Radar markers */}
               {visibleRadarPoints.map((radar, idx) => (
@@ -487,6 +468,24 @@ export default function BirdTracker() {
                 </CircleMarker>
               ))}
 
+              {/* Single bird animation layers */}
+              <Polyline
+                positions={trail}
+                color={currentColor}
+                weight={0.8}
+                opacity={0.9}
+              />
+              {firstPoint && (
+                <CircleMarker
+                  center={[firstPoint.lat, firstPoint.lng]}
+                  radius={4}
+                  fillColor={currentColor}
+                  color={currentColor}
+                  weight={1}
+                  opacity={0.8}
+                  fillOpacity={1}
+                />
+              )}
               <MapUpdater position={[currentPoint.lat, currentPoint.lng]} />
             </MapContainer>
           </div>
@@ -627,27 +626,24 @@ export default function BirdTracker() {
           </div>
 
           <div className="map-wrapper" style={{ border: "1px solid #9afc97" }}>
+            {/* SAME MAP CONTAINER – no key, stable across modes */}
             <MapContainer
               center={mapCenter}
               zoom={mapZoom}
               style={{ height: "400px", width: "100%" }}
               attributionControl={false}
               zoomControl={true}
-              key={compareMode ? "compare" : "single"}
             >
               {/* Base satellite layer */}
               <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
 
-              {/* English street map (same as single mode) */}
+              {/* Soft, Arabic‑friendly label layer (same as single mode) */}
               <TileLayer
-                attribution='Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ'
-                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+                url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png"
                 opacity={labelOpacityRef.current}
                 ref={labelLayerRef}
               />
-
-              {comparePolylines}
-              {compareStartMarkers}
 
               {/* Radar markers */}
               {visibleRadarPoints.map((radar, idx) => (
@@ -684,6 +680,10 @@ export default function BirdTracker() {
                   </Popup>
                 </CircleMarker>
               ))}
+
+              {/* Compare mode overlays */}
+              {comparePolylines}
+              {compareStartMarkers}
             </MapContainer>
           </div>
 
