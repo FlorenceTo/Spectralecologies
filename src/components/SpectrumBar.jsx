@@ -91,7 +91,7 @@ export default function SpectrumBar({ onBandSelect }) {
           fontWeight: "normal",
           color: "white",
           textShadow: "1px 1px 0px rgba(0,0,0,0.7)",
-          backgroundColor: "rgba(0,0,0,0.5)",
+          backgroundColor: "none",
           padding: "2px 8px",
           borderRadius: "12px",
           whiteSpace: "nowrap",

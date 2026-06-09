@@ -21,14 +21,12 @@ export default function HomePage() {
 
   // Radar bands with full names and short names for matching
   const bands = [
-    { name: "HF", fullName: "HF", color: "#ff0000" },
     { name: "UHF (300 MHz - 1 GHz)", fullName: "UHF", color: "#ff9706" },
     { name: "L-Band (1-2 GHz)", fullName: "L", color: "#cdfa05" },
     { name: "S-Band (2-4 GHz)", fullName: "S", color: "#0ceb00" },
     { name: "C-Band (4-8 GHz)", fullName: "C", color: "#00ffd9" },
     { name: "X-Band (8-12 GHz)", fullName: "X", color: "#0926ff" },
     { name: "Ku-Band (12-18 GHz)", fullName: "Ku", color: "#4800ff" },
-    { name: "W-Band (75–110 GHz)", fullName: "W", color: "#ffffff" },
   ];
 
   const handleBandSelect = (shortName) => {
