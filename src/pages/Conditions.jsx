@@ -69,7 +69,21 @@ export default function ConditionsPage() {
             lineHeight: "inherit",
             color: theme === "light" ? "rgba(0, 0, 0, 0.85)" : "rgba(255, 255, 255, 0.85)",
           }}>
-            Magnetic Fields by Florence To
+            Magnetic Fields by{" "}
+            <a
+              href="https://www.florence-to.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "inherit",
+                textDecoration: "underline",
+                textUnderlineOffset: "0.7px",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            >
+              Florence To
+            </a>
           </p>
 
           {/* Main paragraph */}
