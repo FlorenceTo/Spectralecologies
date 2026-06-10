@@ -164,7 +164,7 @@ export default function ConditionsPage() {
           }}
         >
           <img
-            src="/schematics.jpg"
+            src="/schematics_1.jpg"
             alt="Schematics"
             style={{ width: "100%", height: "auto", display: "block" }}
           />
