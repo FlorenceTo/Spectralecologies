@@ -76,8 +76,8 @@ export default function ConditionsPage() {
               rel="noopener noreferrer"
               style={{
                 color: "inherit",
-                textDecoration: "underline",
-                textUnderlineOffset: "0.7px",
+                textDecoration: "none",
+                textUnderlineOffset: "0.5px",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
