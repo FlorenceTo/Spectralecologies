@@ -40,7 +40,7 @@ export default function AboutPage() {
           }}
         >
           <p style={{ margin: "0 0 1rem 0" }}>
-            Welcome to Spectral Ecologies. You're here because I or a friend shared this link with you. This is an ongoing research practice – a private space, not a public archive. I'd be grateful if you didn't share the URL without asking. Thank you for your respect. If you'd like to learn more or get in touch, please visit{" "}
+            Welcome to Spectral Ecologies. You have arrived here because this link was shared with you, either by me or through someone connected to the project. This is an ongoing research practice and a space for developing ideas, materials, and encounters rather than a public archive. I kindly ask that the URL is not shared without permission. Thank you for respecting the nature of the work and the relationships that make it possible. If you would like to learn more or get in touch, please visit{" "}
             <a 
               href="https://www.florence-to.com" 
               target="_blank" 
