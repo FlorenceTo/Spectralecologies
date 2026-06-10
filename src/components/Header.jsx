@@ -27,14 +27,14 @@ export default function Header() {
 
   // Navigation items (label + path)
   const navItems = [
-    { label: "About", path: "/about" },
-    { label: "Home", path: "/" },
+    //{ label: "About", path: "/about" },
+    //{ label: "Home", path: "/" },
     { label: "Ecosemiotics", path: "/ecosemiotics" },
-    { label: "Vulture Map", path: "/birdmap" },
-    { label: "Signal Loss", path: "/interference" },
-    { label: "Sonic Dispossession", path: "/archive-map" },
-    { label: "Interviews", path: "/interviews" },
-    { label: "Research Timeline", path: "/timeline" }
+    //{ label: "Vulture Map", path: "/birdmap" },
+    //{ label: "Signal Loss", path: "/interference" },
+    //{ label: "Sonic Dispossession", path: "/archive-map" },
+    //{ label: "Interviews", path: "/interviews" },
+    //{ label: "Research Timeline", path: "/timeline" }
   ];
 
   // Helper to extract hex and opacity from rgba string
@@ -265,14 +265,14 @@ export default function Header() {
         {/* Right side: Navigation + Color buttons (desktop only) */}
         {!isMobile && (
           <div className="nav-right" style={{ display: "flex", gap: "1.5rem", alignItems: "center", position: "relative" }}>
-            <Link to="/about">About</Link>
-            <Link to="/">Home</Link>
-            <Link to="/ecosemiotics">Ecosemiotics</Link>
-            <Link to="/birdmap">Vulture Map</Link>
-            <Link to="/interference">Signal Loss</Link>
-            <Link to="/archive-map">Sonic Dispossession</Link>
-            <Link to="/interviews">Interviews</Link>
-            <Link to="/timeline">Research Timeline</Link>
+        {/* <Link to="/about">About</Link> */}
+        {/* <Link to="/">Home</Link> */}
+        <Link to="/ecosemiotics">Ecosemiotics</Link>
+        {/* <Link to="/birdmap">Vulture Map</Link> */}
+        {/* <Link to="/interference">Signal Loss</Link> */}
+        {/* <Link to="/archive-map">Sonic Dispossession</Link> */}
+        {/* <Link to="/interviews">Interviews</Link> */}
+        {/* <Link to="/timeline">Research Timeline</Link> */}
             <button className="color-btn" onClick={cyclePreset}>
               {presets[presetIndex].name}
             </button>
