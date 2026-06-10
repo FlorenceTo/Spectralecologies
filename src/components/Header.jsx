@@ -27,8 +27,9 @@ export default function Header() {
 
   // Navigation items (label + path)
   const navItems = [
+    { label: "About", path: "/about" },
     { label: "Home", path: "/" },
-    { label: "Magnetic Fields", path: "/Conditions" },
+    { label: "Ecosemiotics", path: "/ecosemiotics" },
     { label: "Vulture Map", path: "/birdmap" },
     { label: "Signal Loss", path: "/interference" },
     { label: "Sonic Dispossession", path: "/archive-map" },
