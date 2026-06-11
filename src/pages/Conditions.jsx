@@ -152,7 +152,25 @@ export default function ConditionsPage() {
           />
         </div>
 
-        {/* Image 3: schematics.jpg */}
+        {/* Image 3: archive-exp.jpg */}
+        <div
+          style={{
+            marginTop: "2rem",
+            width: "100%",
+            border: `1px solid ${borderColor}`,
+            borderRadius: "0px",
+            overflow: "hidden",
+            backgroundColor: "#fff",
+          }}
+        >
+          <img
+            src="/archive-exp.jpg"
+            alt="Archival evidence"
+            style={{ width: "100%", height: "auto", display: "block" }}
+          />
+        </div>
+
+        {/* Image 4: schematics.jpg */}
         <div
           style={{
             marginTop: "2rem",
